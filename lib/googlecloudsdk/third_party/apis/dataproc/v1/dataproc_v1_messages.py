@@ -54,14 +54,14 @@ class ClusterConfig(_messages.Message):
     gceClusterConfig: [Required] The shared Google Compute Engine config
       settings for all instances in a cluster.
     initializationActions: [Optional] Commands to execute on each node after
-      config is completed. By default, executables are run on master and all
+      config is completed. By default, executables are run on main and all
       worker nodes. You can test a node's <code>role</code> metadata to run an
-      executable on a master or worker node, as shown below:
+      executable on a main or worker node, as shown below:
       ROLE=$(/usr/share/google/get_metadata_value attributes/role)     if [[
-      "${ROLE}" == 'Master' ]]; then       ... master specific actions ...
+      "${ROLE}" == 'Main' ]]; then       ... main specific actions ...
       else       ... worker specific actions ...     fi
-    masterConfig: [Optional] The Google Compute Engine config settings for the
-      master instance in a cluster.
+    mainConfig: [Optional] The Google Compute Engine config settings for the
+      main instance in a cluster.
     secondaryWorkerConfig: [Optional] The Google Compute Engine config
       settings for additional worker instances in a cluster.
     softwareConfig: [Optional] The config settings for software inside the
@@ -73,7 +73,7 @@ class ClusterConfig(_messages.Message):
   configBucket = _messages.StringField(1)
   gceClusterConfig = _messages.MessageField('GceClusterConfig', 2)
   initializationActions = _messages.MessageField('NodeInitializationAction', 3, repeated=True)
-  masterConfig = _messages.MessageField('InstanceGroupConfig', 4)
+  mainConfig = _messages.MessageField('InstanceGroupConfig', 4)
   secondaryWorkerConfig = _messages.MessageField('InstanceGroupConfig', 5)
   softwareConfig = _messages.MessageField('SoftwareConfig', 6)
   workerConfig = _messages.MessageField('InstanceGroupConfig', 7)
@@ -737,7 +737,7 @@ class HiveJob(_messages.Message):
 
 class InstanceGroupConfig(_messages.Message):
   """The config settings for Google Compute Engine resources in an instance
-  group, such as a master or worker group.
+  group, such as a main or worker group.
 
   Fields:
     diskConfig: Disk option config settings.
@@ -756,7 +756,7 @@ class InstanceGroupConfig(_messages.Message):
     managedGroupConfig: [Output-only] The config for Google Compute Engine
       Instance Group Manager that manages this group. This is only used for
       preemptible instance groups.
-    numInstances: The number of VM instances in the instance group. For master
+    numInstances: The number of VM instances in the instance group. For main
       instance groups, must be set to 1.
   """
 

@@ -196,7 +196,7 @@ class ClusterConfig(object):
         'project_id': project_id,
         'server': 'https://' + cluster.endpoint,
     }
-    auth = cluster.masterAuth
+    auth = cluster.mainAuth
     if auth.clientCertificate and auth.clientKey and auth.clusterCaCertificate:
       kwargs['ca_data'] = auth.clusterCaCertificate
       kwargs['client_key_data'] = auth.clientKey

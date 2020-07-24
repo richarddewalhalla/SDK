@@ -58,7 +58,7 @@ class GetCredentials(base.Command):
     log.status.Print('Fetching cluster endpoint and auth data.')
     # Call DescribeCluster to get auth info and cache for next time
     cluster = adapter.GetCluster(cluster_ref)
-    if not cluster.masterAuth:
+    if not cluster.mainAuth:
       raise util.Error(
           'get-credentials requires edit permission on {0}'.format(
               cluster_ref.projectId))
